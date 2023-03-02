@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 class Solution {
     public int solution(String before, String after) {
         int answer = 1;
@@ -5,19 +7,12 @@ class Solution {
         String[] beforeArr = before.split("");
         String[] afterArr = after.split("");
 
-        for (int i = 0; i < beforeArr.length; i++) {
-            for (int j = 0; j < afterArr.length; j++) {
-                if(beforeArr[i].equals(afterArr[j])){
-                    afterArr[j] = "";
-                    break;
-                }
-            }
-        }
+        Arrays.sort(beforeArr);
+        Arrays.sort(afterArr);
 
-        for (int i = 0; i < afterArr.length; i++) {
-            if(!afterArr[i].equals(""))
-                answer = 0;
-        }
+        if(!Arrays.equals(beforeArr, afterArr))
+            answer = 0;
+
 
         return answer;
     }
