@@ -3,13 +3,15 @@ class Solution {
         int answer = 0;
 
         for (int i = 0; i < array.length; i++) {
-            String str = String.valueOf(array[i]);
-            for (int j = 0; j < str.length(); j++) {
-                if(String.valueOf(str.charAt(j)).equals("7"))
+            int tmp = array[i];
+            while(tmp != 0){
+                if(tmp % 10 == 7)
                     answer++;
+                tmp /= 10;
             }
         }
-
+        
+        
         return answer;
     }
 }
