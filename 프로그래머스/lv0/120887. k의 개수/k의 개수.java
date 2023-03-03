@@ -1,16 +1,11 @@
 class Solution {
     public int solution(int i, int j, int k) {
-        int answer = 0;
+        String str = "";
 
         for (int l = i; l <= j; l++) {
-            int tmp = l;
-            while(tmp != 0){
-                if(tmp % 10 == k)
-                    answer++;
-                tmp /= 10;
-            }
+            str = str.concat(String.valueOf(l));
         }
 
-        return answer;
+        return str.length() - str.replace(String.valueOf(k), "").length();
     }
 }
