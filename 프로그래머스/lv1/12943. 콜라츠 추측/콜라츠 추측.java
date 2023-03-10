@@ -6,12 +6,8 @@ class Solution {
             return answer;
 
         while(ll != 1){
-            if (ll % 2 == 0){
-                ll /= 2;
-            } else ll = ll * 3 + 1;
-
+            ll = ll % 2 == 0 ? ll / 2 : ll * 3 + 1;
             answer++;
-
             if (answer == 500)
                 return -1;
         }
