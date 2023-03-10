@@ -1,20 +1,17 @@
 import java.util.*;
 
 class Solution {
-    public int[] solution(int k, int[] score) {
+    public static int[] solution(int k, int[] score) {
         int[] answer = new int[score.length];
-        ArrayList<Integer> list = new ArrayList<>();
-        int idx = 0;
-        
-        while(idx < score.length){
-            list.add(score[idx]);
-            list.sort(Comparator.naturalOrder());
-            if (list.size() > k)
-                list.remove(0);
-            answer[idx] = list.get(0);
-            idx++;
-        }
+        PriorityQueue<Integer> q = new PriorityQueue<>();
 
+        for (int i = 0; i < score.length; i++) {
+            q.add(score[i]);
+            if (q.size() > k) {
+                q.poll();
+            }
+            answer[i] = q.peek();
+        }
         return answer;
     }
 }
