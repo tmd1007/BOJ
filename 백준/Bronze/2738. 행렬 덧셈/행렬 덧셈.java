@@ -1,31 +1,36 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.StringTokenizer;
 
 class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        Scanner sc = new Scanner(System.in);
+        StringTokenizer st;
+        st = new StringTokenizer(br.readLine());
 
-        int N = sc.nextInt();
-        int M = sc.nextInt();
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
         int[][][] num = new int[2][N][M];
 
 
         for (int i = 0; i < num.length; i++) {
             for (int j = 0; j < num[i].length; j++) {
+                st = new StringTokenizer(br.readLine());
                 for (int k = 0; k < num[i][j].length; k++) {
-                    num[i][j][k] = sc.nextInt();
+                    num[i][j][k] = Integer.parseInt(st.nextToken());
                 }
             }
         }
 
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
-                System.out.printf("%d", num[0][i][j] + num[1][i][j]);
-                if (j == M-1)
-                    break;
-                System.out.print(" ");
+                int y = num[0][i][j] + num[1][i][j];
+                bw.write(y + " ");
             }
-            System.out.println();
+            bw.write("\n");
         }
+
+        bw.close();
     }
 }
