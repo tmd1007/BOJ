@@ -13,8 +13,7 @@ class Main {
             st = new StringTokenizer(br.readLine());
             bw.write(Integer.parseInt(st.nextToken()) + Integer.parseInt(st.nextToken()) + "\n");
         }
-        
-        bw.flush();
+
         bw.close();
     }
 }
