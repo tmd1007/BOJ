@@ -3,18 +3,24 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 class Main {
+    static int M = 1234567891;
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        long N = Integer.parseInt(br.readLine());
+        int N = Integer.parseInt(br.readLine());
         String str = br.readLine();
-
+        char[] charArr = str.toCharArray();
         long total = 0;
-
-        for (int i = 0; i < str.length(); i++) {
-            total += Math.pow(31, i) * (str.charAt(i) - 'a' + 1);
+        long pow = 1;
+        for (int i = 0; i < N; i++) {
+            long word = charArr[i] - 'a' + 1;
+            total = total + (word * pow % M);
+            pow = pow * 31 % M;
         }
+        
+        total %= M;
 
         System.out.println(total);
+
     }
 }
