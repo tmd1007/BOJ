@@ -1,17 +1,13 @@
-import java.util.Arrays;
+import java.util.*;
 
 class Solution {
-    public long solution(long n) {
-        long answer = 0;
+  public long solution(long n) {
+        String[] list = String.valueOf(n).split("");
+        Arrays.sort(list);
 
-        char[] charArr = String.valueOf(n).toCharArray();
-        
-        Arrays.sort(charArr);
-        for (int i = 0; i < charArr.length; i++) {
-            answer += (charArr[i] - 48) * Math.pow(10,i);
-        }
-        
-        return answer;
-        
-    }
+        StringBuilder sb = new StringBuilder();
+        for (String aList : list) sb.append(aList);
+
+        return Long.parseLong(sb.reverse().toString());
+  }
 }
