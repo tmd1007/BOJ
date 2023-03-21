@@ -4,7 +4,7 @@ import java.util.stream.Stream;
 
 class Solution {
     public int solution(int[] numbers) {
-        return IntStream.rangeClosed(1,9).sum() - Arrays.stream(numbers).sum();
+        return IntStream.rangeClosed(1,9).filter(i -> Arrays.stream(numbers).noneMatch(n-> n == i)).sum();
 
     }
 }
