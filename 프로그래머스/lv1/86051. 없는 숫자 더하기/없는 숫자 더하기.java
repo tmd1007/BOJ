@@ -1,19 +1,10 @@
+import java.util.*;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
 class Solution {
     public int solution(int[] numbers) {
-        int sum = 0;
-        
-        for (int i = 0; i < 10; i++) {
-            boolean chk = true;
-            for (int j = 0; j < numbers.length; j++) {
-                if (i == numbers[j]){
-                    chk = false;
-                    break;
-                }
-            }
-            if (chk)
-                sum += i;
-        }
-            
-        return sum;
+        return IntStream.rangeClosed(1,9).sum() - Arrays.stream(numbers).sum();
+
     }
 }
