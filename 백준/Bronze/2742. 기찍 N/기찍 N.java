@@ -9,8 +9,7 @@ public class Main {
         int N = Integer.parseInt(br.readLine());
 
         for (int i = N; i > 0; i--) {
-            bw.write(i + "");
-            bw.newLine();
+            bw.write(i + "\n");
         }
 
         br.close();
