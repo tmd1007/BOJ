@@ -1,16 +1,10 @@
 class Solution {
     public int solution(int n) {
         int answer = 0;
-        boolean[] chkPrime = new boolean[n+1];
 
-        for (int i = 2; i < chkPrime.length; i++) {
-            if (chkPrime[i])
-                continue;
-            answer++;
-            int num = i;
-            for (int j = num; j <= n; j += num) {
-                chkPrime[j] = true;
-            }
+        for (int i = 2; i <= n; i++) {
+            if (isPrime(i))
+                answer++;
         }
         
         return answer;
