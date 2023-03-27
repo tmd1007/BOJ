@@ -11,11 +11,11 @@ class Solution {
             hm.put(key, hm.get(key) -1);
         }
 
-        for (String key: participant) {
-            if (hm.get(key) != 0)
-                return key;
+        for (Map.Entry<String, Integer> key: hm.entrySet()) {
+            if (key.getValue() != 0)
+                return key.getKey();
         }
-        
+
         return "";
     }
 }
