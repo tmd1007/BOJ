@@ -21,13 +21,14 @@ class Main {
     public static String make(StringBuilder[] sb) {
         if (sb.length == 1)
             return sb[0].toString();
+
         char[] c1 = sb[0].toString().toCharArray();
 
-        for (int i = 1; i < N; i++) {
-            char[] c2 = sb[i].toString().toCharArray();
-            for (int j = 0; j < c2.length; j++) {
-                if (c1[j] != c2[j]){
-                    c1[j] = '?';
+        for (int i = 0; i < c1.length; i++) {
+            for (int j = 1; j < N; j++) {
+                if (c1[i] != sb[j].charAt(i)){
+                    c1[i] = '?';
+                    break;
                 }
             }
         }
