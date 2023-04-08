@@ -16,9 +16,6 @@ class Solution {
             map.replace(callings[i], map.get(callings[i]) -1);
             map.replace(change, map.get(change) + 1);
             
-            map2.remove(map.get(callings[i]));
-            map2.remove(map.get(change));
-            
             map2.put(map.get(callings[i]), callings[i]);
             map2.put(map.get(change), change);
         }
