@@ -1,8 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.StringTokenizer;
 
 public class Main{
@@ -26,19 +24,17 @@ public class Main{
         int max = 0;
         int answer = 1;
         for (int i = 0; i < N; i++) {
-            Set<Integer> set = new HashSet<>();
-            for (int j = 0; j < 5; j++) {
-                for (int k = 0; k < N; k++) {
-                    if (i != k && stu[i][j] == stu[k][j]){
-                        set.add(k);
+            for (int j = 0; j < N; j++) {
+                for (int k = 0; k < 5; k++) {
+                    if (i != j && stu[i][k] == stu[j][k]){
+                        cnt[i]++;
+                        break;
                     }
                 }
             }
-            cnt[i] += set.size();
-
-            if (max < cnt[i]){
+            if (cnt[i] > max) {
                 max = cnt[i];
-                answer = i+1;
+                answer = i + 1;
             }
         }
         System.out.println(answer);
