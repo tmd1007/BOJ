@@ -9,19 +9,16 @@ class Main{
         String str = br.readLine();
 
         if (str.length() % 3 == 1) {
-            int n = str.charAt(0) - '0';
-            sb.append(n);
+            sb.append(str.charAt(0) - '0');
         }
 
         if (str.length() % 3 == 2) {
-            int n = ((str.charAt(0) - '0') * 2) + ((str.charAt(1) - '0'));
-            sb.append(n);
+            sb.append(((str.charAt(0) - '0') * 2) + ((str.charAt(1) - '0')));
         }
 
         for (int i = str.length()%3; i < str.length(); i = i+3) {
             String s = str.substring(i, 3+i);
-            int n = ((s.charAt(0) - '0') * 4) + ((s.charAt(1) - '0') * 2) + ((s.charAt(2) - '0'));
-            sb.append(n);
+            sb.append(((s.charAt(0) - '0') * 4) + ((s.charAt(1) - '0') * 2) + ((s.charAt(2) - '0')));
         }
 
         System.out.println(sb);
