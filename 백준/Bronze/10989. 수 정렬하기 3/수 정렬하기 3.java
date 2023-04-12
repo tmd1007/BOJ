@@ -13,9 +13,8 @@ class Main {
         }
 
         for (int i = 1; i < 10001; i++) {
-            while(numArr[i] > 0) {
-                sb.append(i).append("\n");
-                numArr[i]--;
+            if (numArr[i] > 0) {
+                sb.append((i + "\n").repeat(numArr[i]));
             }
         }
 
