@@ -8,23 +8,19 @@ class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
+        StringBuilder sb = new StringBuilder();
         N = Integer.parseInt(br.readLine());
 
-        if(N != 1){
-            while (N != 1) {
-                for (int i = 2; i <= N; i++) {
-                    if (N % i == 0){
-                        list.add(i);
-                        N /= i;
-                        break;
-                    }
-                }
+        for (int i = 2; i <= Math.sqrt(N); i++) {
+            while (N % i == 0) {
+                sb.append(i).append("\n");
+                N /= i;
             }
         }
 
-        for (int n : list) {
-            System.out.println(n);
-        }
+        if (N != 1)
+            sb.append(N);
+
+        System.out.println(sb);
     }
 }
