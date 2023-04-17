@@ -6,7 +6,7 @@ class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
-
+        StringBuilder sb = new StringBuilder();
         int[] T = new int[51];
         for (int i = 0; i < T.length; i++) {
             T[i] = i * (i + 1) / 2;
@@ -32,8 +32,10 @@ class Main {
                 }
             }
             if (chk)
-                System.out.println(1);
-            else System.out.println(0);
+                sb.append(1 + "\n");
+            else sb.append(0 + "\n");
         }
+
+        System.out.println(sb);
     }
 }
