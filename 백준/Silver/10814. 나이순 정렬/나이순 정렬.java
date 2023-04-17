@@ -8,7 +8,8 @@ class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
         int N = Integer.parseInt(br.readLine());
-        List<Members> list = new ArrayList<>();
+
+        /*List<Members> list = new ArrayList<>();
         for (int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine());
             int cnt = i + 1;
@@ -16,9 +17,29 @@ class Main {
             String name = st.nextToken();
             Members m = new Members(cnt, age, name);
             list.add(m);
+        }*/
+
+        Members[] list = new Members[N];
+        for (int i = 0; i < N; i++) {
+            st = new StringTokenizer(br.readLine());
+            int cnt = i + 1;
+            int age = Integer.parseInt(st.nextToken());
+            String name = st.nextToken();
+            Members m = new Members(cnt, age, name);
+            list[i] = m;
         }
 
-        list.sort(new Comparator<Members>() {
+        /*list.sort(new Comparator<Members>() {
+            @Override
+            public int compare(Members o1,   Members o2) {
+                if (o1.age == o2.age) {
+                    return o1.cnt - o2.cnt;
+                } else
+                    return o1.age - o2.age;
+            }
+        });*/
+
+        Arrays.sort(list, new Comparator<Members>() {
             @Override
             public int compare(Members o1, Members o2) {
                 if (o1.age == o2.age) {
@@ -29,8 +50,14 @@ class Main {
         });
 
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < list.size(); i++) {
+        /*for (int i = 0; i < list.size(); i++) {
             sb.append(list.get(i).age).append(" ").append(list.get(i).name).append('\n');
+        }
+
+        System.out.println(sb);*/
+
+        for (Members m : list) {
+            sb.append(m.age).append(" ").append(m.name).append('\n');
         }
 
         System.out.println(sb);
