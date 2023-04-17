@@ -19,29 +19,28 @@ class Main {
 
         for (int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine());
-            arr[i][1] = Integer.parseInt(st.nextToken());
             arr[i][0] = Integer.parseInt(st.nextToken());
+            arr[i][1] = Integer.parseInt(st.nextToken());
         }
 
         boolean[] chk = new boolean[N];
 
-        loop:
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < N; j++) {
-                if (i == 0 && arr[j][i] <= L && !chk[j]) {
-                    chk[j] = true;
-                    sum += 140;
-                    cnt++;
-                } else if (i == 1 && arr[j][i] <= L && !chk[j]) {
-                    chk[j] = true;
-                    sum += 100;
-                    cnt++;
-                }
-
-                if (cnt == K) {
-                    break loop;
-                }
+        for (int i = 0; i < N; i++) {
+            if (arr[i][1] <= L) {
+                chk[i] = true;
+                sum += 140;
+                cnt++;
             }
+        }
+
+        for (int i = 0; i < N; i++) {
+            if (arr[i][0] <= L && !chk[i]) {
+                sum += 100;
+                cnt++;
+            }
+
+            if (cnt == K)
+                break;
         }
 
         System.out.println(sum);
