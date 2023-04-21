@@ -5,21 +5,22 @@ import java.util.*;
 
 class Main {
 
-    static HashSet<String> set = new LinkedHashSet<>();
+    static HashMap<String, String> map = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
+        StringTokenizer st;
         int N = Integer.parseInt(br.readLine());
         for (int i = 0; i < N; i++) {
-            String[] str = br.readLine().split(" ");
-            if (set.contains(str[0]))
-                set.remove(str[0]);
-            else
-                set.add(str[0]);
+            st = new StringTokenizer(br.readLine());
+            map.put(st.nextToken(), st.nextToken());
         }
 
-        ArrayList<String> list = new ArrayList<>(set);
+        ArrayList<String> list = new ArrayList<>();
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            if (entry.getValue().equals("enter"))
+                list.add(entry.getKey());
+        }
 
         list.sort(Collections.reverseOrder());
 
