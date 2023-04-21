@@ -23,8 +23,11 @@ class Main {
 
         list.sort(Collections.reverseOrder());
 
+        StringBuilder sb = new StringBuilder();
         for (String s : list) {
-            System.out.println(s);
+            sb.append(s).append('\n');
         }
+
+        System.out.println(sb);
     }
 }
