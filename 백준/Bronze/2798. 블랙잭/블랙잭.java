@@ -27,7 +27,10 @@ class Main {
                     int M2 = M;
                     sum += arr[i] + arr[j] + arr[k];
                     M2 -= sum;
-                    if (M2 >= 0) {
+                    if (M2 == 0) {
+                        max = sum;
+                        break loop;
+                    } else if (M2 > 0) {
                         max = Math.max(max, sum);
                     }
                 }
