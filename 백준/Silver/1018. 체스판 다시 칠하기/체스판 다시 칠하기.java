@@ -4,6 +4,9 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 class Main {
+    static int count = Integer.MAX_VALUE;
+    static boolean[][] chess;
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
@@ -14,9 +17,7 @@ class Main {
         int y = Integer.parseInt(st.nextToken());
         int row = x - 8;
         int col = y - 8;
-        boolean[][] chess = new boolean[x][y];
-
-        int result = Integer.MAX_VALUE;
+        chess = new boolean[x][y];
 
         for (int i = 0; i < x; i++) {
             String str = br.readLine();
@@ -28,15 +29,14 @@ class Main {
 
         for (int i = 0; i <= row; i++) {
             for (int j = 0; j <= col; j++) {
-                result = Math.min(result, chk(i, j, chess));
+                chk(i, j);
             }
         }
 
-        System.out.println(result);
+        System.out.println(count);
     }
 
-    static int chk(int x, int y, boolean[][] arr) {
-        int result = Integer.MAX_VALUE;
+    static void chk(int x, int y) {
         int cnt;
 
         boolean chk;
@@ -46,16 +46,14 @@ class Main {
             chk = i == 0;
             for (int j = x; j < x + 8; j++) {
                 for (int k = y; k < y + 8; k++) {
-                    if (chk != arr[j][k]) {
+                    if (chk != chess[j][k]) {
                         cnt++;
                     }
                     chk = !chk;
                 }
                 chk = !chk;
             }
-            result = Math.min(result, cnt);
+            count = Math.min(count, cnt);
         }
-
-        return result;
     }
 }
