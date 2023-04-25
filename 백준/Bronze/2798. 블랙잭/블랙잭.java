@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 class Main {
@@ -17,6 +18,7 @@ class Main {
 
         }
 
+        Arrays.sort(arr);
 
         int max = 0;
         loop :
@@ -32,6 +34,8 @@ class Main {
                         break loop;
                     } else if (M2 > 0) {
                         max = Math.max(max, sum);
+                    } else {
+                        break;
                     }
                 }
             }
