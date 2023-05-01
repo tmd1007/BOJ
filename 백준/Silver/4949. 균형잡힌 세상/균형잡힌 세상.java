@@ -1,34 +1,51 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Stack;
 
 class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        String str;
+        Stack<Character> stack;
         StringBuilder sb = new StringBuilder();
-        while (true) {
-            StringBuilder target = new StringBuilder();
-            str = br.readLine();
-            if (str.equals("."))
+        while(true) {
+            char[] arr = br.readLine().toCharArray();
+            stack = new Stack<>();
+            if (arr.length == 1 && arr[0] == '.')
                 break;
 
-            char[] arr = str.toCharArray();
+            loop :
             for (char c : arr) {
-                if (c == '(' || c == ')' || c == '[' || c == ']')
-                    target.append(c);
+                switch (c) {
+                    case '(':
+                        stack.add(c);
+                        break;
+                    case '[':
+                        stack.add(c);
+                        break;
+                    case ')':
+                        if (!stack.isEmpty() && stack.peek() == '(') {
+                            stack.pop();
+                            break;
+                        } else {
+                            stack.add(c);
+                            break loop;
+                        }
+                    case ']':
+                        if (!stack.isEmpty() && stack.peek() == '[') {
+                            stack.pop();
+                            break;
+                        } else {
+                            stack.add(c);
+                            break loop;
+                        }
+                }
             }
 
-            str = target.toString();
-            while (str.contains("()") || str.contains("[]")) {
-                str = str.replace("()", "");
-                str = str.replace("[]", "");
-            }
-
-            if (str.length() > 0) {
-                sb.append("no").append('\n');
-            } else sb.append("yes").append('\n');
+            if (stack.isEmpty())
+                sb.append("yes").append('\n');
+            else sb.append("no").append('\n');
         }
 
         System.out.println(sb);
