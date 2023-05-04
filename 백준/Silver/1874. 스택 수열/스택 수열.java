@@ -21,13 +21,13 @@ class Main {
         int idx = 0;
         while (num <= N) {
             s.add(num);
-            sb.append("+").append('\n');
+            sb.append('+').append('\n');
             num++;
 
             while (!s.empty() && (s.peek() == target[idx])) {
                 idx++;
                 s.pop();
-                sb.append("-").append('\n');
+                sb.append('-').append('\n');
             }
         }
 
