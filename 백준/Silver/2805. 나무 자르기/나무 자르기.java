@@ -11,7 +11,7 @@ class Main {
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
 
-        long[] trees = new long[N];
+        int[] trees = new int[N];
         st = new StringTokenizer(br.readLine());
 
         long start = 0;
@@ -28,7 +28,7 @@ class Main {
             long result = 0;
             long mid = (start + end) / 2;
             for (int i = 0; i < trees.length; i++) {
-                long tree = trees[i];
+                int tree = trees[i];
                 if (tree > mid)
                     result += tree - mid;
             }
