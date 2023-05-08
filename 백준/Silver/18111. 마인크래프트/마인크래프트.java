@@ -4,6 +4,9 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 class Main {
+
+    static int[] ground = new int[257];
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -12,45 +15,50 @@ class Main {
         int M = Integer.parseInt(st.nextToken());
         int B = Integer.parseInt(st.nextToken());
 
-        int[][] ground = new int[N][M];
+        int min = 257;
+        int max = 0;
 
         for (int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine());
             for (int j = 0; j < M; j++) {
-                ground[i][j] = Integer.parseInt(st.nextToken());
+                int n = Integer.parseInt(st.nextToken());
+                ground[n]++;
+                min = Math.min(min, n);
+                max = Math.max(max, n);
             }
         }
 
-        int h = -1;
-        int sec;
         int result = Integer.MAX_VALUE;
-        int result_h = 0;
-        
-        loop:
-        while (h++ <= 256) {
-            int block = B;
-            sec = 0;
+        int result_h = min;
 
-            for (int i = 0; i < N; i++) {
-                for (int j = 0; j < M; j++) {
-                    int n = h - ground[i][j];
-                    if (n >= 0) {
-                        block -= n;
-                        sec += n;
+        min--;
+        while (min++ < max) {
+            int block = B;
+            int time = 0;
+            for (int i = 256; i >= 0; i--) {
+                if (ground[i] > 0) {
+                    int diff = (i - min) * ground[i];
+                    if (diff >= 0) {
+                        block += diff;
+                        time += diff * 2;
                     } else {
-                        sec -= n * 2;
-                        block -= n;
+                        block += diff;
+                        time -= diff;
                     }
                 }
             }
 
-            if (block >= 0 && sec <= result) {
-                result = sec;
-                result_h = Math.max(h, result_h);
+            if (block < 0) {
+                break;
+            } else {
+                if (result >= time) {
+                    result = time;
+                    result_h = min;
+                }
             }
-
         }
 
         System.out.println(result + " " + result_h);
+
     }
 }
