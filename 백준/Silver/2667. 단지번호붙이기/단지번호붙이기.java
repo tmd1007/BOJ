@@ -10,18 +10,18 @@ class Main {
     static boolean[][] graph;
     static int[] movX = {-1, 1, 0, 0};
     static int[] movY = {0, 0, 1, -1};
-
+    static int cnt;
     static List<Integer> list = new ArrayList<>();
 
-    public static void dfs(int x, int y, Integer integer) {
+    public static void dfs(int x, int y) {
         graph[x][y] = false;
-        list.set(list.size()-1, list.get(list.size()-1) + 1);
+        cnt++;
 
         for (int i = 0; i < 4; i++) {
             int newX = x + movX[i];
             int newY = y + movY[i];
             if (graph[newX][newY]) {
-                dfs(newX, newY, integer);
+                dfs(newX, newY);
             }
         }
     }
@@ -45,16 +45,20 @@ class Main {
         for (int i = 0; i < range; i++) {
             for (int j = 0; j < range; j++) {
                 if (graph[i][j]) {
-                    list.add(0);
-                    dfs(i, j, list.get(list.size()-1));
+                    cnt = 0;
+                    dfs(i, j);
+                    list.add(cnt);
                 }
             }
         }
 
         Collections.sort(list);
-        System.out.println(list.size());
+        StringBuilder sb = new StringBuilder();
+        sb.append(list.size()).append('\n');
         for (int n : list) {
-            System.out.println(n);
+            sb.append(n).append('\n');
         }
+
+        System.out.println(sb);
     }
 }
