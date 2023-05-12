@@ -7,7 +7,7 @@ import java.util.StringTokenizer;
 
 class Main {
 
-    static int M, N, H, green, ans;
+    static int M, N, H, green;
 
     static Queue<int[]> q = new LinkedList<>();
 
@@ -17,11 +17,12 @@ class Main {
     static int[] movX = {0,0,1,-1,0,0};
     static int[] movY = {0,0,0,0,1,-1};
 
-    public static void bfs() {
+    public static int bfs() {
+        int qZ = 0, qX = 0, qY = 0;
         while(!q.isEmpty()) {
-            int qZ = q.peek()[0];
-            int qX = q.peek()[1];
-            int qY = q.peek()[2];
+            qZ = q.peek()[0];
+            qX = q.peek()[1];
+            qY = q.peek()[2];
             q.poll();
             for (int i = 0; i < 6; i++) {
                 int newZ = qZ + movZ[i];
@@ -29,15 +30,15 @@ class Main {
                 int newY = qY + movY[i];
                 if (newZ >= 0 && newZ < H && newX >= 0 && newX < N && newY >= 0 && newY < M) {
                     if (graph[newZ][newX][newY] == 0) {
-                        graph[newZ][newX][newY] = 1;
-                        cnt[newZ][newX][newY] = cnt[qZ][qX][qY] + 1;
-                        ans = Math.max(ans, cnt[newZ][newX][newY]);
-                        green--;
+                        graph[newZ][newX][newY] = graph[qZ][qX][qY] + 1;
                         q.add(new int[]{newZ, newX, newY});
+                        green--;
                     }
                 }
             }
         }
+
+        return graph[qZ][qX][qY] - 1;
     }
 
     public static void main(String[] args) throws IOException {
@@ -66,7 +67,7 @@ class Main {
             }
         }
 
-        bfs();
+        int ans = bfs();
 
         System.out.println(green == 0 ? ans : -1);
     }
