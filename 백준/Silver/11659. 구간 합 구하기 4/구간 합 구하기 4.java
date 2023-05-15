@@ -11,17 +11,10 @@ class Main {
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
         int[] arr = new int[N+1];
-        int[] dp = new int[N+1];
         st = new StringTokenizer(br.readLine(), " ");
 
         for (int i = 1; i <= N; i++) {
-            arr[i] = Integer.parseInt(st.nextToken());
-        }
-
-        dp[1] = arr[1];
-
-        for (int i = 2; i <= N; i++) {
-            dp[i] += dp[i-1] + arr[i];
+            arr[i] = arr[i-1] + Integer.parseInt(st.nextToken());
         }
 
         StringBuilder sb = new StringBuilder();
@@ -29,7 +22,7 @@ class Main {
             st = new StringTokenizer(br.readLine(), " ");
             int start = Integer.parseInt(st.nextToken());
             int end = Integer.parseInt(st.nextToken());
-            int sum = dp[end] - dp[start-1];
+            int sum = arr[end] - arr[start-1];
             sb.append(sum).append('\n');
         }
 
