@@ -1,9 +1,10 @@
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.Queue;
+import java.util.List;
 
 class Main {
 
+    static int N, K;
     static StringBuilder sb = new StringBuilder();
 
     private static int read() throws IOException {
@@ -14,24 +15,28 @@ class Main {
         return n;
     }
 
+    public static void input() throws IOException {
+        N = read();
+        K = read();
+    }
+
     public static void main(String[] args) throws IOException {
-        int N = read();
-        int K = read();
+        input();
 
-        Queue<Integer> q = new LinkedList<>();
+        List<Integer> list = new LinkedList<>();
         for (int i = 0; i < N; i++) {
-            q.add(i + 1);
+            list.add(i + 1);
         }
 
+        int idx = 0;
         sb.append('<');
-        while(q.size() != 1) {
-            for (int i = 0; i < K-1; i++) {
-                q.add(q.poll());
-            }
-            sb.append(q.poll()).append(',').append(' ');
+        while(list.size() != 1) {
+            idx = (idx + K - 1) % list.size();
+            sb.append(list.get(idx)).append(',').append(' ');
+            list.remove(idx);
         }
 
-        sb.append(q.poll()).append('>');
+        sb.append(list.get(0)).append('>');
         System.out.println(sb);
     }
 }
