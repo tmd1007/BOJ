@@ -14,9 +14,9 @@ class Main {
 
         for (int i = 2; i <= N; i++) {
             int min = 4;
-            int idx = 1;
-            for (int j = idx; j <= i; j = (int)Math.pow(++idx, 2)) {
-                min = Math.min(min, dp[i-j]);
+            for (int j = 1; j*j <= i; j++) {
+                int tmp = i - j * j;
+                min = Math.min(min, dp[tmp]);
             }
             dp[i] = min + 1;
         }
