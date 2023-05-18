@@ -77,8 +77,7 @@ public class Main {
         int i = 0;
         for (int x : copiedArr) {
             if (!copedMap.containsKey(x)) {
-                copedMap.put(x, i);
-                i++;
+                copedMap.put(x, i++);
             }
         }
 
@@ -87,7 +86,7 @@ public class Main {
         }
 
         for (int n = 0; n < N; n++) {
-            sb.append(originArr[n]).append(" ");
+            sb.append(originArr[n]).append(' ');
         }
 
         System.out.println(sb);
