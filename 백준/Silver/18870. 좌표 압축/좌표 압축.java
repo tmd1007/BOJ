@@ -1,5 +1,7 @@
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 class Main {
     static int rank;
@@ -19,67 +21,56 @@ class Main {
         return isMinus ? -n : n;
     }
 
-
-    public static void heapSort(int[] arr) {
-        // 힙으로 재구성 (maxHeap 기준, 마지막 부모 노드부터)
-        for(int i = arr.length / 2 - 1; i >= 0; i--) {
-            heapify(arr, i, arr.length);
-        }
-
-        // maxHeap 기준 root 쪽을 끝 쪽으로 보내면서 재정렬 -> 오름차순
-        for(int i = arr.length - 1; i > 0; i--) {
-            swap(arr, 0, i);
-            heapify(arr, 0, i);
+    public static void mergeSort(int[] arr, int[] tmp, int left, int right) {
+        if (left < right) {
+            int mid = (left + right) / 2;
+            mergeSort(arr, tmp, left, mid);
+            mergeSort(arr, tmp, mid + 1, right);
+            merge(arr, tmp, left, right, mid);
         }
     }
 
-    public static void heapify(int[] arr, int parentIdx, int size) {
-        // 자식 노드 위치
-        int leftIdx = 2 * parentIdx + 1;
-        int rightIdx = 2 * parentIdx + 2;
-        int maxIdx = parentIdx;
-
-        // 왼쪽 자식 노드가 크면 maxIdx 를 해당 인덱스로 교체
-        if(leftIdx < size && arr[maxIdx] < arr[leftIdx]) {
-            maxIdx = leftIdx;
+    public static void merge(int[] arr, int[] tmp, int left, int right, int mid) {
+        int p = left;
+        int q = mid + 1;
+        int idx = p;
+        // p, q 둘 중 하나는 해당 배열 범위 안에 있는 동안
+        while (p <= mid || q <= right) {
+            if (p <= mid && q <= right) {   // 둘 다 범위 안인 경우
+                if (arr[p] <= arr[q]) { // 값 비교하여 정렬
+                    tmp[idx++] = arr[p++];
+                } else {
+                    tmp[idx++] = arr[q++];
+                }
+            } else if (p <= mid && q > right) { // 왼쪽만 남은 경우 이어주기
+                tmp[idx++] = arr[p++];
+            } else {                            // 오른쪽만 남은 경우 이어주기
+                tmp[idx++] = arr[q++];
+            }
         }
 
-        // 오른쪽 자식 노드가 크면 maxIdx 를 해당 인덱스로 교체
-        if(rightIdx < size && arr[maxIdx] < arr[rightIdx]) {
-            maxIdx = rightIdx;
-        }
-
-        // maxIdx 가 바뀐 경우, 부모 노드가 교체되는 것을 의미
-        // 교체하고 서브 트리 검사 하도록 재귀 호출
-        if(parentIdx != maxIdx) {
-            swap(arr, maxIdx, parentIdx);
-            heapify(arr, maxIdx, size);
+        for (int i = left; i <= right; i++) {   // 정렬된 부분 데이터 arr 쪽으로
+            arr[i] = tmp[i];
         }
     }
-
-    public static void swap(int[] arr, int i, int j) {
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-    }
-
 
     public static void main(String[] args) throws IOException {
+
         int N = read();
         int[] arr = new int[N];
-
+        int[] tmp = new int[N];
         for (int i = 0; i < N; i++) {
             int n = read();
             arr[i] = n;
         }
 
-        int[] arrSort = arr.clone();
-
         HashMap<Integer, Integer> map = new HashMap<>();
 
-        heapSort(arrSort);
+        int[] sortedArray = arr.clone();
 
-        for (int j : arrSort) {
+        mergeSort(sortedArray, tmp, 0, N - 1);
+
+        for (int j : sortedArray) {
             if (!map.containsKey(j)) {
                 map.put(j, rank++);
             }
