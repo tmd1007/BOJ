@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.Queue;
 
 class Main {
 
@@ -15,12 +17,28 @@ class Main {
         return n;
     }
 
-    public static void dfs(int idx) {
+ /*   public static void dfs(int idx) {
         visit[idx] = true;
 
         for (int i = 1; i <= N; i++) {
             if (!visit[i] && graph[idx][i]) {
                 dfs(i);
+            }
+        }
+    }*/
+
+    public static void bfs(int idx) {
+        Queue<Integer> q = new LinkedList<>();
+        q.add(idx);
+        visit[idx] = true;
+
+        while(!q.isEmpty()) {
+            int start = q.poll();
+            for (int i = 1; i <= N; i++) {
+                if (!visit[i] && graph[start][i]) {
+                    q.add(i);
+                    visit[i] = true;
+                }
             }
         }
     }
@@ -42,7 +60,7 @@ class Main {
         for (int i = 1; i <= N; i++) {
             if (!visit[i]) {
                 ans++;
-                dfs(i);
+                bfs(i);
             }
         }
 
