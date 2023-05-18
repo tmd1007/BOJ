@@ -1,11 +1,7 @@
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+import java.io.*;
 
-class Main {
-    static int rank;
-
+public class Main {
     private static int read() throws IOException {
         boolean isMinus = false;
         int c, n = System.in.read();
@@ -21,66 +17,83 @@ class Main {
         return isMinus ? -n : n;
     }
 
-    public static void mergeSort(int[] arr, int[] tmp, int left, int right) {
+    public void mSort(int[] arr) {
+        int[] tempArr = new int[arr.length];
+        div(arr, tempArr, 0, arr.length - 1);
+    }
+
+    public void div(int[] arr, int[] tempArr, int left, int right) {
         if (left < right) {
-            int mid = (left + right) / 2;
-            mergeSort(arr, tmp, left, mid);
-            mergeSort(arr, tmp, mid + 1, right);
-            merge(arr, tmp, left, right, mid);
+            int middle = (left + right) / 2;
+            div(arr, tempArr, left, middle);
+            div(arr, tempArr, middle + 1, right);
+
+            sor(arr, tempArr, left, middle, right);
         }
     }
 
-    public static void merge(int[] arr, int[] tmp, int left, int right, int mid) {
-        int p = left;
-        int q = mid + 1;
-        int idx = p;
-        // p, q 둘 중 하나는 해당 배열 범위 안에 있는 동안
-        while (p <= mid || q <= right) {
-            if (p <= mid && q <= right) {   // 둘 다 범위 안인 경우
-                if (arr[p] <= arr[q]) { // 값 비교하여 정렬
-                    tmp[idx++] = arr[p++];
-                } else {
-                    tmp[idx++] = arr[q++];
-                }
-            } else if (p <= mid && q > right) { // 왼쪽만 남은 경우 이어주기
-                tmp[idx++] = arr[p++];
-            } else {                            // 오른쪽만 남은 경우 이어주기
-                tmp[idx++] = arr[q++];
+    public void sor(int[] arr, int[] tempArr, int left, int middle, int right) {
+        for (int i = left; i <= right; i++) {
+            tempArr[i] = arr[i];
+        }
+
+        int k = left;
+        int s = left;
+        int e = middle + 1;
+
+        while (s <= middle && e <= right) {
+            if (tempArr[s] <= tempArr[e]) {
+                arr[k++] = tempArr[s++];
+            } else {
+                arr[k++] = tempArr[e++];
             }
         }
 
-        for (int i = left; i <= right; i++) {   // 정렬된 부분 데이터 arr 쪽으로
-            arr[i] = tmp[i];
+        while (s <= middle) {
+            arr[k++] = tempArr[s++];
+        }
+
+        while (e <= right) {
+            arr[k++] = tempArr[e++];
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public void solution() throws IOException {
+        StringBuilder sb = new StringBuilder();
 
         int N = read();
-        int[] arr = new int[N];
-        int[] tmp = new int[N];
-        for (int i = 0; i < N; i++) {
-            int n = read();
-            arr[i] = n;
+
+        int[] originArr = new int[N];
+        int[] copiedArr = new int[N];
+        for (int n = 0; n < N; n++) {
+            int x = read();
+            originArr[n] = copiedArr[n] = x;
         }
 
-        HashMap<Integer, Integer> map = new HashMap<>();
+        mSort(copiedArr);
 
-        int[] sortedArray = arr.clone();
+        HashMap<Integer, Integer> copedMap = new HashMap<Integer, Integer>();
 
-        mergeSort(sortedArray, tmp, 0, N - 1);
-
-        for (int j : sortedArray) {
-            if (!map.containsKey(j)) {
-                map.put(j, rank++);
+        int i = 0;
+        for (int x : copiedArr) {
+            if (!copedMap.containsKey(x)) {
+                copedMap.put(x, i);
+                i++;
             }
         }
 
-        StringBuilder sb = new StringBuilder();
-        for (int j : arr) {
-            sb.append(map.get(j)).append(' ');
+        for (int n = 0; n < N; n++) {
+            originArr[n] = copedMap.get(originArr[n]);
+        }
+
+        for (int n = 0; n < N; n++) {
+            sb.append(originArr[n]).append(" ");
         }
 
         System.out.println(sb);
+    }
+
+    public static void main(String[] args) throws IOException {
+        new Main().solution();
     }
 }
