@@ -8,42 +8,33 @@ import java.util.StringTokenizer;
 class Main {
 
     static int N, X, ans;
-    static boolean[] visit;
+    static int[] visit = new int[100001];
 
 
     public static void bfs(int n) {
-        Queue<int[]> q = new LinkedList<>();
-        q.add(new int[]{n, 0});
+        Queue<Integer> q = new LinkedList<>();
+        q.add(n);
         while(!q.isEmpty()) {
-            int loc = q.peek()[0];
-            int depth = q.peek()[1];
-            visit[loc] = true;
-            q.poll();
+            int loc = q.poll();
             if (loc == X) {
-                ans = depth;
+                ans = visit[loc];
                 break;
             }
-            if (chk(loc - 1)) {
-                q.add(new int[]{loc - 1, depth + 1});
+            if (loc - 1 >= 0 && visit[loc - 1] == 0) {
+                q.add(loc - 1);
+                visit[loc - 1] = visit[loc] + 1;
             }
-            if (chk(loc + 1)) {
-                q.add(new int[]{loc + 1, depth + 1});
+            if (loc + 1 <= 100000 && visit[loc + 1] == 0) {
+                q.add(loc + 1);
+                visit[loc + 1] = visit[loc] + 1;
             }
-            if (chk(loc * 2)) {
-                q.add(new int[]{loc * 2, depth + 1});
+            if (loc * 2 <= 100000 && visit[loc * 2] == 0) {
+                q.add(loc * 2);
+                visit[loc * 2] = visit[loc] + 1;
             }
         }
 
     }
-
-    public static boolean chk(int n) {
-        if (n < 0 || n > 100000 || visit[n]) {
-            return false;
-        }
-
-        return true;
-    }
-
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -51,7 +42,6 @@ class Main {
 
         N = Integer.parseInt(st.nextToken());
         X = Integer.parseInt(st.nextToken());
-        visit = new boolean[100001];
         bfs(N);
 
         System.out.println(ans);
