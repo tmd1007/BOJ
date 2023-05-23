@@ -17,25 +17,19 @@ class Main {
 
             for (int i = 0; i < N; i++) {
                 st = new StringTokenizer(br.readLine(), " ");
-                String s = st.nextToken();
+                char c = st.nextToken().charAt(0);
                 int n = Integer.parseInt(st.nextToken());
-                if (s.equals("I")) {
-                    map.put(n, map.getOrDefault(n, 0) + 1);
+                if (c == 'I') {
+                    map.merge(n, 1, Integer::sum);
                 } else {
                     if (map.isEmpty()) {
                         continue;
                     }
-
-                    if (n == 1) {
-                        map.put(map.lastKey(), map.get(map.lastKey()) - 1);
-                        if (map.get(map.lastKey()) == 0) {
-                            map.remove(map.lastKey());
-                        }
+                    n = n == 1 ? map.lastKey() : map.firstKey();
+                    if (map.get(n) == 1) {
+                        map.remove(n);
                     } else {
-                        map.put(map.firstKey(), map.get(map.firstKey()) - 1);
-                        if (map.get(map.firstKey()) == 0) {
-                            map.remove(map.firstKey());
-                        }
+                        map.merge(n, -1, Integer::sum);
                     }
                 }
             }
