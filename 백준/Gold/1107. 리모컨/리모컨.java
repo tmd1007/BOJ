@@ -8,14 +8,25 @@ class Main {
     static int ans;
     static boolean[] btn;
 
-    public static boolean chk(String s) {
-        for (int i = 0; i < s.length(); i++) {
-            int idx = Character.getNumericValue(s.charAt(i));
-            if (btn[idx]) {
-                return false;
+    public static int chk(int n) {
+        if (n == 0) {
+            if (btn[0]) {
+                return -1;
+            } else {
+                return 1;
             }
         }
-        return true;
+        int l = 0;
+        while(n != 0) {
+            int r = n % 10;
+            if (btn[r]) {
+                return -1;
+            }
+            l++;
+            n /= 10;
+        }
+        
+        return l;
     }
 
     public static void main(String[] args) throws IOException {
@@ -38,12 +49,11 @@ class Main {
         int hit;
         for (int i = 0; i < 1000000; i++) {
             hit = 0;
-            String s = String.valueOf(i);
-            if (!chk(s)) {
+            hit += chk(i);
+            if (hit == -1) {
                 continue;
             }
-
-            hit += s.length();
+            
             hit += Math.abs(target - i);
             ans = Math.min(ans, hit);
         }
