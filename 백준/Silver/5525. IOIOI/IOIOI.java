@@ -8,19 +8,18 @@ class Main {
 
         int N = Integer.parseInt(br.readLine());
         int M = Integer.parseInt(br.readLine());
-        String s = br.readLine();
-        
-        StringBuilder sb = new StringBuilder();
-        sb.append('I');
+
+        StringBuilder s = new StringBuilder();
+        s.append('I');
         for (int i = 0; i < N; i++) {
-            sb.append('O').append('I');
+            s.append('O').append('I');
         }
-        
-        String io = sb.toString();
 
         int cnt = 0;
-        for (int i = 0; i < M; i++) {
-            if (s.substring(i).startsWith(io)) {
+        String str = s.toString();
+        StringBuilder sb = new StringBuilder(br.readLine());
+        for (int i = 0; i < M - N * 2; i++) {
+            if(sb.substring(i, N * 2 + 1 + i).equals(str)) {
                 cnt++;
             }
         }
