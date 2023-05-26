@@ -23,12 +23,10 @@ class Main {
 
     public static void gold(int n) {
         for (int i = 3; i < chk.length; i += 2) {
-            if (!chk[i]) {
-                int x = n - i;
-                if (!chk[x]) {
-                    sb.append(n).append(" = ").append(i).append(" + ").append(x).append('\n');
-                    return;
-                }
+            if (!chk[i] && !chk[n - i]) {
+                sb.append(n).append(" = ").append(i).append(" + ").append(n - i).append('\n');
+                return;
+                
             }
         }
 
