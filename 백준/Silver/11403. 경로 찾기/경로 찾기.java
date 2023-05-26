@@ -11,15 +11,12 @@ class Main {
     static boolean[] visit;
     static int N;
 
-    public static boolean bfs(int start, int target) {
+    public static void bfs(int start) {
         Queue<Integer> q = new LinkedList<>();
         q.add(start);
 
         while(!q.isEmpty()) {
             int r = q.poll();
-            if (visit[target]) {
-                return true;
-            }
             for (int i = 0; i < N; i++) {
                 if (map[r][i] && !visit[i]) {
                     visit[i] = true;
@@ -27,8 +24,6 @@ class Main {
                 }
             }
         }
-
-        return false;
     }
 
 
@@ -51,9 +46,10 @@ class Main {
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < N; i++) {
+            visit = new boolean[N];
+            bfs(i);
             for (int j = 0; j < N; j++) {
-                visit = new boolean[N];
-                if (bfs(i, j)) {
+                if (visit[j]) {
                     sb.append(1).append(' ');
                 } else {
                     sb.append(0).append(' ');
