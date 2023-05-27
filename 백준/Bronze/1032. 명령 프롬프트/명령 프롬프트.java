@@ -3,36 +3,21 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 class Main {
-
-    static int N;
-
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args ) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        N = Integer.parseInt(br.readLine());
-        StringBuilder[] sb = new StringBuilder[N];
-        for (int i = 0; i < N; i++) {
-            sb[i] = new StringBuilder(br.readLine());
-        }
-
-        System.out.println(make(sb));
-    }
-
-    public static String make(StringBuilder[] sb) {
-        if (sb.length == 1)
-            return sb[0].toString();
-
-        char[] c1 = sb[0].toString().toCharArray();
-
-        for (int i = 0; i < c1.length; i++) {
-            for (int j = 1; j < N; j++) {
-                if (c1[i] != sb[j].charAt(i)){
-                    c1[i] = '?';
-                    break;
+        int N = Integer.parseInt(br.readLine());
+        char[] charArr = br.readLine().toCharArray();
+        for (int i = 0; i < N - 1; i++) {
+            char[] c = br.readLine().toCharArray();
+            for (int j = 0; j < c.length; j++) {
+                if (charArr[j] != c[j]) {
+                    charArr[j] = '?';
                 }
             }
         }
-        return new String(c1);
+
+        System.out.println(String.valueOf(charArr));
+
     }
 }
-
