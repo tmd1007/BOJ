@@ -8,32 +8,27 @@ class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         int N = Integer.parseInt(br.readLine());
-        int[] origin = new int[N];
-        int[] sorted = new int[N];
+        int[] A = new int[N];
+        int[] B = new int[N];
+        int max = 0, cnt = 0;
         StringTokenizer st = new StringTokenizer(br.readLine());
         for (int i = 0; i < N; i++) {
             int n = Integer.parseInt(st.nextToken());
-            origin[i] = n;
-            sorted[i] = n;
+            A[i] = n;
+            max = Math.max(max, n);
         }
 
-        Arrays.sort(sorted);
-
-        HashMap<Integer,Queue<Integer>> map = new HashMap<>();
-        for (int i = 0; i < N; i++) {
-            if (!map.containsKey(sorted[i])) {
-                Queue<Integer> q = new LinkedList<>();
-                map.put(sorted[i], q);
-                q.add(i);
-            } else {
-                map.get(sorted[i]).add(i);
+        for (int i = 1; i <= max; i++) {
+            for (int j = 0; j < N; j++) {
+                if (A[j] == i) {
+                    B[j] = cnt++;
+                }
             }
         }
-
+        
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < N; i++) {
-            int n = map.get(origin[i]).poll();
-            sb.append(n).append(' ');
+            sb.append(B[i]).append(' ');
         }
 
         System.out.println(sb);
