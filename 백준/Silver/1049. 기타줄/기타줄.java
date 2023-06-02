@@ -11,7 +11,7 @@ class Main {
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
 
-        int six = Integer.MAX_VALUE, one = Integer.MAX_VALUE;
+        int six = 1001, one = 1001;
 
         for (int i = 0; i < M; i++) {
             st = new StringTokenizer(br.readLine(), " ");
@@ -22,27 +22,9 @@ class Main {
             one = Math.min(one, m);
         }
 
-        int sum = 0;
+        int sum;
 
-        while (N > 0) {
-            if (N >= 6) {
-                if (six / 6 < one) {
-                    sum += six;
-                    N -= 6;
-                } else {
-                    sum += one;
-                    N--;
-                }
-            } else {
-                if (six < one * N) {
-                    sum += six;
-                    N -= 6;
-                } else {
-                    sum += one;
-                    N--;
-                }
-            }
-        }
+        sum = Math.min(six * ((N / 6) + 1), Math.min(one * N, six * (N / 6) + one * (N % 6)));
 
         System.out.println(sum);
     }
