@@ -27,7 +27,7 @@ class Main {
 
     public static void main (String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
@@ -39,7 +39,7 @@ class Main {
         }
 
         for (int i = 0; i < M; i++) {
-            st = new StringTokenizer(br.readLine());
+            st = new StringTokenizer(br.readLine(), " ");
             int u = Integer.parseInt(st.nextToken());
             int v = Integer.parseInt(st.nextToken());
             list.get(u).add(v);
@@ -47,7 +47,7 @@ class Main {
         }
 
         for (int i = 1; i <= N; i++) {
-            Collections.sort(list.get(i), new Comparator<Integer>() {
+            list.get(i).sort(new Comparator<Integer>() {
                 @Override
                 public int compare(Integer o1, Integer o2) {
                     return o2 - o1;
