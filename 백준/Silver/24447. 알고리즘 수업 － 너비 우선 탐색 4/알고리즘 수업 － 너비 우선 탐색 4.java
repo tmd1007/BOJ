@@ -5,7 +5,7 @@ import java.util.*;
 
 class Main {
 
-    static List<Integer>[] lists;
+    static PriorityQueue<Integer>[] lists;
     static int[] visit;
     static int[] depth;
 
@@ -16,8 +16,8 @@ class Main {
         visit[n] = ++cnt;
         while(!q.isEmpty()) {
             int cur = q.poll();
-            for (int i = 0; i < lists[cur].size(); i++) {
-                int next = lists[cur].get(i);
+            while(!lists[cur].isEmpty()){
+                int next = lists[cur].poll();
                 if (visit[next] == 0) {
                     visit[next] = ++cnt;
                     depth[next] = depth[cur] + 1;
@@ -35,12 +35,12 @@ class Main {
         int M = Integer.parseInt(st.nextToken());
         int R = Integer.parseInt(st.nextToken());
 
-        lists = new ArrayList[N+1];
+        lists = new PriorityQueue[N+1];
         depth = new int[N+1];
         visit = new int[N+1];
 
         for (int i = 1; i <= N; i++) {
-            lists[i] = new ArrayList<>();
+            lists[i] = new PriorityQueue<>();
         }
 
         for (int i = 0; i < M; i++) {
@@ -49,10 +49,6 @@ class Main {
             int v = Integer.parseInt(st.nextToken());
             lists[u].add(v);
             lists[v].add(u);
-        }
-
-        for (int i = 1; i <= N; i++) {
-            Collections.sort(lists[i]);
         }
 
         bfs(R);
