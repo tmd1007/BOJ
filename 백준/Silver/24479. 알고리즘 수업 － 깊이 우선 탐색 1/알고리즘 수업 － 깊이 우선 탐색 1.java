@@ -10,15 +10,10 @@ class Main {
     static int depth;
 
     public static void dfs(int n) {
-        if (visit[n] != 0) {
-            return;
-        } else {
-            visit[n] = ++depth;
-        }
-
         while(!node[n].isEmpty()) {
             int next = node[n].poll();
             if (visit[next] == 0) {
+                visit[next] = ++depth;
                 dfs(next);
             }
         }
@@ -48,10 +43,14 @@ class Main {
             node[v].add(u);
         }
 
+        visit[R] = ++depth;
         dfs(R);
 
+        StringBuilder sb = new StringBuilder();
         for (int i = 1; i <= N; i++) {
-            System.out.println(visit[i]);
+            sb.append(visit[i]).append('\n');
         }
+
+        System.out.println(sb);
     }
 }
