@@ -32,12 +32,7 @@ class Main {
         visit = new int[N+1];
 
         for (int i = 1; i <= N; i++) {
-            node[i] = new PriorityQueue<>(new Comparator<Integer>() {
-                @Override
-                public int compare(Integer o1, Integer o2) {
-                    return o2 - o1;
-                }
-            });
+            node[i] = new PriorityQueue<>((o1, o2) -> o2 - o1);
         }
 
         for (int i = 0; i < M; i++) {
