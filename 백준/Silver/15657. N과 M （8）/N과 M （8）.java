@@ -19,12 +19,9 @@ class Main {
             return;
         }
 
-
         for (int i = idx; i < N; i++) {
             arr[depth] = data[i];
-            dfs(idx, depth + 1);
-
-            idx++;
+            dfs(i, depth + 1);
         }
     }
 
