@@ -18,13 +18,13 @@ class Main {
         int X = Integer.parseInt(br.readLine());
         Arrays.sort(arr);
         int ans = 0;
-        int left = 0, right = arr.length-1;
+        int left = 0, right = N-1;
         while(left != right) {
             int sum = arr[left] + arr[right];
-            if (sum == X) {
-                ans++;
-                left++;
-            } else if (sum > X) {
+            if (sum >= X) {
+                if (sum == X) {
+                    ans++;
+                }
                 right--;
             } else {
                 left++;
