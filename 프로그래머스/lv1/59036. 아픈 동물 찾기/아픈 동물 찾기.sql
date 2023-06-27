@@ -1,4 +1,4 @@
-SELECT ANIMAL_ID, NAME
-FROM ANIMAL_INS
-WHERE INTAKE_CONDITION LIKE 'SICK'
-ORDER BY ANIMAL_ID ASC;
+select animal_id, name
+from animal_ins
+where intake_condition = 'sick'
+order by animal_id;
