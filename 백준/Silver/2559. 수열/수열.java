@@ -17,16 +17,16 @@ class Main {
             arr[i] = Integer.parseInt(st.nextToken());
         }
 
-        int[] sum = new int[N-K+1];
+        int sum = 0;
         for (int i = 0; i < K; i++) {
-            sum[0] += arr[i];
+            sum += arr[i];
         }
 
-        int max = sum[0];
+        int max = sum;
 
         for (int i = 0; i < N - K; i++) {
-            sum[i+1] = sum[i] + arr[i+K] - arr[i];
-            max = Math.max(max, sum[i+1]);
+            sum += arr[i+K] - arr[i];
+            max = Math.max(max, sum);
         }
 
         System.out.println(max);
