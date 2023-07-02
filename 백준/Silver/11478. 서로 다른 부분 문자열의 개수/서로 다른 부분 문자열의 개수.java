@@ -9,6 +9,7 @@ class Main{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         String str = br.readLine();
+        StringBuilder s = new StringBuilder(str);
         HashSet<String> set = new HashSet<>();
         int idx = 0;
         int len = str.length();
@@ -16,8 +17,8 @@ class Main{
         while(idx <= len) {
             idx++;
             for (int i = 0; i < len - idx + 1; i++) {
-                String s = str.substring(i, i+idx);
-                set.add(s);
+                String ss = s.substring(i, i + idx);
+                set.add(ss);
             }
         }
 
