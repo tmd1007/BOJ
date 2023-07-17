@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.StringTokenizer;
 
 class Main{
@@ -9,29 +10,29 @@ class Main{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
 
-        int[] arrX = new int[1001];
-        int[] arrY = new int[1001];
+        HashSet<Integer> listX = new HashSet<>();
+        HashSet<Integer> listY = new HashSet<>();
 
         for (int i = 0; i < 3; i++) {
             st = new StringTokenizer(br.readLine());
             int x = Integer.parseInt(st.nextToken());
             int y = Integer.parseInt(st.nextToken());
-            arrX[x]++;
-            arrY[y]++;
-        }
-
-        int x = 0, y = 0;
-
-        for (int i = 1; i <= 1000; i++) {
-            if (arrX[i] == 1) {
-                x = i;
+            if (listX.contains(x)) {
+                listX.remove(x);
+            } else {
+                listX.add(x);
             }
-            if (arrY[i] == 1) {
-                y = i;
+            if (listY.contains(y)) {
+                listY.remove(y);
+            } else {
+                listY.add(y);
             }
         }
 
-        System.out.printf("%d %d", x, y);
+        Object[] x = listX.toArray();
+        Object[] y = listY.toArray();
+
+        System.out.printf("%s %s", x[0], y[0]);
 
     }
 }
