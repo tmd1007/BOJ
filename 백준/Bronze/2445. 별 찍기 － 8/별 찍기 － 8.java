@@ -8,22 +8,27 @@ class Main {
         
         int N = Integer.parseInt(br.readLine());
 
-        int len = 2*N-1;
+        int len = 2*N;
 
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < len; i++) {
-            int star = Math.abs(N - (len - i));
-            for (int j = 0; j < N-star; j++) {
+        for (int i = 0; i < N-1; i++) {
+            for (int j = 0; j < i+1; j++) {
                 sb.append('*');
             }
-            for (int j = 0; j < star*2; j++) {
+            for (int j = 0; j < (N-i-1)*2; j++) {
                 sb.append(' ');
             }
-            for (int j = 0; j < N-star; j++) {
+            for (int j = 0; j < i+1; j++) {
                 sb.append('*');
             }
             sb.append('\n');
         }
+        StringBuilder re = new StringBuilder(sb);
+        re.reverse();
+        for (int i = 0; i < len; i++) {
+            sb.append('*');
+        }
+        sb.append(re);
 
         System.out.println(sb);
     }
