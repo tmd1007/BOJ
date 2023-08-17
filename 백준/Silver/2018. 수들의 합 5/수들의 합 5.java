@@ -7,9 +7,9 @@ class Main{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
 
-        int ans = 0;
+        int ans = 1;
         int n = 0;
-        while(n < N) {
+        while(n*2 < N) {
             n++;
             int r = n;
             int sum = 0;
@@ -23,6 +23,6 @@ class Main{
             }
         }
 
-        System.out.println(ans);
+        System.out.println(N == 1 ? 1 : ans);
     }
 }
