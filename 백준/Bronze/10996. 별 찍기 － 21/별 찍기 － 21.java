@@ -11,11 +11,7 @@ class Main{
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < N*2; i++) {
             for (int j = 0; j < N; j++) {
-                if ((i+j) % 2 == 0) {
-                    sb.append('*');
-                } else {
-                    sb.append(' ');
-                }
+                sb.append((i+j) % 2 == 0 ? '*' : ' ');
             }
             sb.append('\n');
         }
